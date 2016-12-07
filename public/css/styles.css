@@ -4301,6 +4301,11 @@ hr {
 .row {
   max-width: 100%; }
 
+/* line 151, ../../source_sass/_base.scss */
+.col-lg-3 {
+  width: 25%;
+  height: 220px; }
+
 /*
   NOTE: Do not touch this file. Write the bulk of your custom styles
   in _base.scss

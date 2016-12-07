@@ -1,6 +1,36 @@
 var Controllers = angular.module('Controllers', []);
    
     
+Controllers.controller('LoginController', ['$scope', '$http', '$location',  function($scope, $http, $location) {
+
+    $scope.submit = function() {
+        var data = {
+            email: $scope.email,
+            password: $scope.password
+        }
+
+        $http.post('/api/login', data)
+            .success(function(data) {
+                $location.path('/profile');
+            }).error(function(data) {
+        });
+    };
+}]);
+
+Controllers.controller('SignupController', ['$scope', '$http', '$location', function($scope, $http, $location) {
+    $scope.submit = function() {
+        var data = {
+            email: $scope.email,
+            password: $scope.password
+        }
+        $http.post('/api/signup', data)
+            .success(function(data) {
+                $location.path('/profile');
+        }).error(function(data) {
+
+        });
+    };
+}]);
 
 //CODE handles all the front page interactions 
 Controllers.controller('myFirstController', ['$scope','$http', '$filter' , function($scope, $http, $filter) {

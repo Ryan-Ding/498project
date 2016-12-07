@@ -6,6 +6,18 @@ app.config(['$routeProvider' , function($routeProvider) {
     templateUrl: 'index.html',
     controller: 'myFirstController'
     }).
+    when('/login', {
+    templateUrl: 'partials/login.html',
+    controller: 'LoginController'
+  }).
+    when('/signup', {
+    templateUrl: 'partials/signup.html',
+    controller: 'SignupController'
+  }).
+    when('/profile', {
+    templateUrl: 'index.html',
+    controller: 'myFirstController'
+    }).
   otherwise({
     redirectTo: '/'
   });
