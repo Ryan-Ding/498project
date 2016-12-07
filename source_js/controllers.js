@@ -5,31 +5,52 @@ Controllers.controller('LoginController', ['$scope', '$http', '$location',  func
 
     $scope.submit = function() {
         var data = {
-            email: $scope.email,
+            netid: $scope.netid,
             password: $scope.password
         }
 
-        $http.post('/api/login', data)
+        $http.post('http://fa16-cs498rk-083.cs.illinois.edu:4000/api/login', data)
             .success(function(data) {
                 $location.path('/profile');
-            }).error(function(data) {
+            }).error(function(data) {  
         });
     };
 }]);
 
 Controllers.controller('SignupController', ['$scope', '$http', '$location', function($scope, $http, $location) {
     $scope.submit = function() {
-        var data = {
-            email: $scope.email,
-            password: $scope.password
+        var mydata = {
+            netid: $scope.netid,
+            name: $scope.name,
+            graduationDate: $scope.graduationDate,
+            password: $scope.password,
         }
-        $http.post('/api/signup', data)
+
+        var temp=Math.floor(Math.random()*4);
+            $scope.myClasses;
+
+            $http.get('./data/random.json').
+          success(function(data1){
+            $scope.myClasses=data1[temp];
+            //console.log($scope.myClasses);
+            mydata.classTaken=$scope.myClasses.classTaken;
+            mydata.classInProgress=$scope.myClasses.classInProgress;
+            mydata.classRegistered=$scope.myClasses.classRegistered;
+
+            $http.post('http://fa16-cs498rk-083.cs.illinois.edu:4000/api/signup', mydata)
             .success(function(data) {
                 $location.path('/profile');
         }).error(function(data) {
-
+            alert("error");
         });
+        
+          }).error(function(err){
+          });
+
+          //console.log(mydata);
     };
+
+
 }]);
 
 //CODE handles all the front page interactions 
@@ -73,11 +94,14 @@ $(function () {
     
     });
 
-
-    $http.get('./data/classes.json').
+    $http.get('http://fa16-cs498rk-083.cs.illinois.edu:4000/api/profile').
     success(function(data){
+      //console.log(data);
+
+    //$http.get('./data/classes.json').
+    //success(function(data){
       $scope.classes = data;
-      console.log(data) ;
+      //console.log(data) ;
       $scope.classes = $filter('filter')($scope.classes, {course_number: "!" + "MUS 181"});
 
       $scope.whatifclass=0;

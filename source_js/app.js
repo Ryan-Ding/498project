@@ -15,7 +15,7 @@ app.config(['$routeProvider' , function($routeProvider) {
     controller: 'SignupController'
   }).
     when('/profile', {
-    templateUrl: 'index.html',
+    templateUrl: 'partials/profile.html',
     controller: 'myFirstController'
     }).
   otherwise({
